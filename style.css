@@ -1,0 +1,83 @@
+:root {
+    --gryffindor-color: #740001;
+    --ravenclaw-color: #0e1a40;
+    --slytherin-color: #1a472a;
+    --hufflepuff-color: #ffdb00;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    padding: 0px;
+    margin: 0px;
+}
+
+.title {
+    width: 100%;
+    height: 10vh;
+    background-color: lightgrey;
+}
+
+main {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.rightColumn {
+    width: 20%;
+    background-color: lightgray;
+}
+
+.center {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.leftColumn {
+    width: 20%;
+    background-color: lightgray;
+}
+
+.student {
+    margin-top: 1em;
+    width: 45%;
+    height: 20vh;
+    display: flex;
+    flex-direction: row;
+    background-color: darkslategray;
+}
+
+.student .houseColor {
+    display: block;
+    width: 1em;
+    height: 1em;
+}
+
+.gryffindor {
+    background-color: var(--gryffindor-color);
+}
+
+.ravenclaw {
+    background-color: var(--ravenclaw-color);
+}
+
+.hufflepuff {
+    background-color: var(--hufflepuff-color);
+}
+
+.slytherin {
+    background-color: var(--slytherin-color);
+}
+
+.student p {
+    display: inline;
+}

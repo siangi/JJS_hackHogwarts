@@ -7,8 +7,32 @@
     <title>Hack Hogwarts Studentlist</title>
     <script src="./scripts/control.js" type="module"></script>
     <script src="./scripts/view.js" type="module"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="title">
+        <h1>Studentlist</h1>
+    </div>
+    <main>
+        <div class="rightColumn" id="filtersSorts" >
+            <h2>Filter</h2>
+            <h2>Sort by:</h2>
+        </div>
+        <div class="center" id="studentList">     
+        </div>
+        <div class="leftColumn" id="statistics">
+            <h2>statistics</h2>
+        </div>
+    </main>
+    <template id="studentTemplate">
+        <div class="student">
+            <img src="" alt="" class="overviewPortrait" data-field="portrait">
+            <div class="description">
+                <h3 data-field="fullname"></h3>  
+                <span class="houseColor" data-field="housecolor"></span>
+                <p class="roles" data-field="roles"></p>
+            </div>
+        </div>
+    </template>
 </body>
 </html>

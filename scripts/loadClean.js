@@ -1,12 +1,9 @@
 "use strict";
 
 import { Person, HOUSES, ROLES } from "./Student.js";
-let peopleObjects = [];
 
 export async function loadAndCleanStudents(url) {
-    let studentList = await loadStudentList(url).then((people) => {
-        return createPeopleList(people);
-    });
+    let studentList = await loadStudentList(url).then(createPeopleList);
     return studentList;
 }
 
@@ -19,19 +16,32 @@ async function loadStudentList(url) {
 }
 
 function createPeopleList(jsonPeople) {
+    let peopleObjects = [];
     jsonPeople.forEach((jsonObj) => {
         let person = Object.create(Person);
         fillNames(jsonObj.fullname.trim(), person);
         person.house = capitalStartRestSmall(jsonObj.house);
         person.filename = getImagePath(person.lastname, person.firstname);
+        person.roles = [];
+        person.roles.push(ROLES.captain);
+
         peopleObjects.push(person);
     });
 
-    return jsonPeople;
+    return peopleObjects;
 }
 
+// TODO: make less hacky
 function getImagePath(lastname, firstname) {
-    return `..\..\resources\images\\${lastname.toLowerCase()}_${firstname.substring(0, 1).toLowerCase()}.png`;
+    let filename = lastname.toLowerCase() + "_" + firstname.substring(0, 1).toLowerCase();
+    if (firstname === "Parvati") {
+        filename = "patil_parvati";
+    } else if (firstname === "Padma") {
+        filename = "patil_padma";
+    } else if (firstname === "Justin") {
+        filename = "fletchley_j";
+    }
+    return `.\..\\..\\resources\\students\\${filename}.png`;
 }
 
 function fillNames(fullname, personToFill) {

@@ -16,10 +16,10 @@ const ROLES = {
 };
 
 const HOUSES = {
-    gryffindor: "gryffindor",
-    ravenclaw: "ravenclaw",
-    hufflepuff: "hufflepuff",
-    slytherin: "slytherin",
+    gryffindor: "Gryffindor",
+    ravenclaw: "Ravenclaw",
+    hufflepuff: "Hufflepuff",
+    slytherin: "Slytherin",
 };
 
 export { Person, ROLES, HOUSES };
