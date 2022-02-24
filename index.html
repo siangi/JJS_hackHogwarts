@@ -24,6 +24,59 @@
             <h2>statistics</h2>
         </div>
     </main>
+
+    <div class="modal">
+        <div class="modalContent">
+            <div class="modalTitle" data-field="houseColor">
+                <button class="closeModal">close</button>
+                <div>
+                    <img src="resources/crests/gryffindor.png" data-field="housecrest"/>
+                    <img src="resources/students/potter_h.png" data-field="profilepicture">
+                </div>
+            </div>
+            <div class="information">
+                <div class="names">
+                    <div class="labelValueContainer">
+                        <p>firstname</p>
+                        <h3 data-field="firstname">Harry</h3>
+                    </div>
+                    <div class="labelValueContainer">
+                        <p>middle</p>
+                        <h3 data-field="middlename">James</h3>
+                    </div>
+                    <div class="labelValueContainer">
+                        <p>last</p>
+                        <h3 data-field="lastname">Potter</h3>
+                    </div>
+                </div>
+                <div class="labelValueContainer">
+                    <p>nickname</p>
+                    <h4 data-field="nickname">Chosen</h4>
+                </div>
+                <div class="labelValueContainer">
+                    <p>blood status</p>
+                    <h4 data-field="blood-status">Pureblood</h4>
+                </div>
+                <div class="withBtn">
+                    <div class="labelValueContainer">
+                        <p>roles</p>
+                        <h4 data-field="roles">Captain, Savior</h4>
+                    </div>
+                    <button class="changeRoles">edit Roles</button>
+                </div>
+                <div class="withBtn">
+                    <div class="labelValueContainer">
+                        <p>status</p>
+                        <h4 data-field="expelled">enrolled</h4>
+                        
+                    </div>
+                    <button class="expel">expel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <template id="studentTemplate">
         <div class="student">
             <img src="" alt="" class="overviewPortrait" data-field="portrait">

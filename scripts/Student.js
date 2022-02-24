@@ -1,25 +1,37 @@
-const Person = {
+export const Person = {
     firstname: "",
     lastname: "",
     middlename: "",
     nickname: "",
     filename: "",
+    crestFilename: "",
+    bloodstatus: "",
     house: "",
     roles: [],
     expelled: false,
 };
 
-const ROLES = {
+export const ROLES = {
     prefect: "prefect",
     captain: "captain",
     inquisitor: "inquistitor",
 };
 
-const HOUSES = {
+export const HOUSES = {
     gryffindor: "Gryffindor",
     ravenclaw: "Ravenclaw",
     hufflepuff: "Hufflepuff",
     slytherin: "Slytherin",
 };
 
-export { Person, ROLES, HOUSES };
+export function createFullnameFromParts(firstname, middlename, lastname) {
+    let fullname = firstname + " ";
+
+    if (middlename !== " ") {
+        fullname += middlename + " ";
+    }
+
+    fullname += lastname;
+
+    return fullname;
+}

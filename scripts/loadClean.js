@@ -1,5 +1,5 @@
 "use strict";
-
+const BASE_RESOURCES_PATH = "...\\..\\resources";
 import { Person, HOUSES, ROLES } from "./Student.js";
 
 export async function loadAndCleanStudents(url) {
@@ -21,10 +21,11 @@ function createPeopleList(jsonPeople) {
         let person = Object.create(Person);
         fillNames(jsonObj.fullname.trim(), person);
         person.house = capitalStartRestSmall(jsonObj.house);
+        person.crestFilename = getHouseCrestPath(person.house);
         person.filename = getImagePath(person.lastname, person.firstname);
+        person.bloodstatus = "not implemented";
         person.roles = [];
         person.roles.push(ROLES.captain);
-
         peopleObjects.push(person);
     });
 
@@ -41,7 +42,12 @@ function getImagePath(lastname, firstname) {
     } else if (firstname === "Justin") {
         filename = "fletchley_j";
     }
-    return `.\..\\..\\resources\\students\\${filename}.png`;
+
+    return `${BASE_RESOURCES_PATH}\\students\\${filename}.png`;
+}
+
+function getHouseCrestPath(house) {
+    return `${BASE_RESOURCES_PATH}\\crests\\${house.toLowerCase()}.png`;
 }
 
 function fillNames(fullname, personToFill) {
