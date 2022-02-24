@@ -24,6 +24,12 @@ export const HOUSES = {
     slytherin: "Slytherin",
 };
 
+export const BLOODSTATUS = {
+    pureblood: "pureblood",
+    halfBlood: "half blood",
+    muggleBorn: "muggle born",
+};
+
 export function createFullnameFromParts(firstname, middlename, lastname) {
     let fullname = firstname + " ";
 

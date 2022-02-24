@@ -84,7 +84,7 @@ main {
 
 .modal {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 0;
     height: 100%;

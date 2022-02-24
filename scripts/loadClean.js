@@ -1,13 +1,15 @@
 "use strict";
 const BASE_RESOURCES_PATH = "...\\..\\resources";
-import { Person, HOUSES, ROLES } from "./Student.js";
+import { Person, HOUSES, ROLES, BLOODSTATUS } from "./Student.js";
 
 export async function loadAndCleanStudents(url) {
-    let studentList = await loadStudentList(url).then(createPeopleList);
+    let families = await loadJsonData("./resources/families.json").then(createFamiliesList);
+    console.log(families);
+    let studentList = await loadJsonData(url).then((peopleJSon) => createPeopleList(peopleJSon, families));
     return studentList;
 }
 
-async function loadStudentList(url) {
+async function loadJsonData(url) {
     const response = await fetch(url, { mode: "no-cors" }).then((data) => {
         return data.json();
     });
@@ -15,7 +17,7 @@ async function loadStudentList(url) {
     return response;
 }
 
-function createPeopleList(jsonPeople) {
+function createPeopleList(jsonPeople, familyStatus) {
     let peopleObjects = [];
     jsonPeople.forEach((jsonObj) => {
         let person = Object.create(Person);
@@ -23,13 +25,32 @@ function createPeopleList(jsonPeople) {
         person.house = capitalStartRestSmall(jsonObj.house);
         person.crestFilename = getHouseCrestPath(person.house);
         person.filename = getImagePath(person.lastname, person.firstname);
-        person.bloodstatus = "not implemented";
+        person.bloodstatus = getBloodstatus(person.lastname, familyStatus);
         person.roles = [];
         person.roles.push(ROLES.captain);
         peopleObjects.push(person);
     });
 
     return peopleObjects;
+}
+
+function getBloodstatus(lastname, familyStatuses) {
+    if (familyStatuses.halfblood.indexOf(lastname) >= 0) {
+        return BLOODSTATUS.halfBlood;
+    }
+
+    if (familyStatuses.pureblood.indexOf(lastname) >= 0) {
+        return BLOODSTATUS.pureblood;
+    }
+
+    return BLOODSTATUS.muggleBorn;
+}
+
+function createFamiliesList(jsonData) {
+    let families = {};
+    families.pureblood = jsonData.pure;
+    families.halfblood = jsonData.half;
+    return families;
 }
 
 // TODO: make less hacky
