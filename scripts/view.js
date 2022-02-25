@@ -10,6 +10,32 @@ export function showStudentList(students) {
     students.forEach(showStudent);
 }
 
+export function setSortingChange(sortFunc) {
+    let radioBtns = document.querySelectorAll("[data-action=sortCriteria]");
+    radioBtns.forEach((radioBtn) => {
+        radioBtn.addEventListener("change", () => {
+            let value = getSelectedSorting();
+            sortFunc(value);
+        });
+    });
+}
+
+export function setSortingDirectionChange(sortFunc) {
+    let button = document.querySelector("[data-field=sortDirection]");
+    button.addEventListener("click", (event) => {
+        const newDirection = sortFunc();
+        if (newDirection == "asc") {
+            event.target.textContent = "ascending";
+        } else {
+            event.target.textContent = "descending";
+        }
+    });
+}
+
+function getSelectedSorting() {
+    return document.querySelector("input[name=sorting]:checked").value;
+}
+
 function showStudent(student) {
     let clone = document.querySelector("#studentTemplate").content.cloneNode(true);
     let parent = document.querySelector("#studentList");
@@ -91,4 +117,8 @@ function removeHouseColorFromModal(houses, houseColorNode) {
     for (const house in houses) {
         houseColorNode.classList.remove(house.toLowerCase());
     }
+}
+
+function sortByFirstName() {
+    Controller.sortingChange("fistname");
 }

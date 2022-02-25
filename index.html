@@ -17,6 +17,16 @@
         <div class="rightColumn" id="filtersSorts" >
             <h2>Filter</h2>
             <h2>Sort by:</h2>
+            <p>sorting Direction</p>
+            <button id="sortDirection" data-field="sortDirection">ascending</button>
+            <input type="radio" name="sorting" id="sortFirstname" data-action="sortCriteria" value="firstname">
+            <label for="sortFirstname">First name</label>
+            <input type="radio" name="sorting" id="sortLastname" data-action="sortCriteria" value="lastname">
+            <label for="sortLastname">Last name</label>
+            <input type="radio" name="sorting" id="sortHouse" data-action="sortCriteria" value="house">
+            <label for="sortHouse">House</label>
+            <input type="radio" name="sorting" id="sortJobs" data-action="sortCriteria" value="jobs">
+            <label for="sortJobs">Jobs</label>
         </div>
         <div class="center" id="studentList">     
         </div>

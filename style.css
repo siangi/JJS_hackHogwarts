@@ -8,6 +8,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    height: fit-content;
 }
 
 h1 {
@@ -155,4 +156,8 @@ main {
 
 .withBtn {
     display: flex;
+}
+
+input[type="radio"] {
+    display: block;
 }
