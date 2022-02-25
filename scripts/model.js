@@ -115,6 +115,8 @@ export function changeFilter(newCategory, newCriteria) {
 export function filter(newCategory, newCriteria, list) {
     if (newCategory === "roles") {
         return list.filter(filterWithPropAndValContains);
+    } else if (newCategory === "expelled") {
+        return list.filter(filterWithPropAndValDirect);
     } else {
         return list.filter(filterWithPropAndVal);
     }
@@ -126,4 +128,19 @@ export function filter(newCategory, newCriteria, list) {
     function filterWithPropAndValContains(student) {
         return student[newCategory].indexOf(newCriteria) > -1;
     }
+
+    function filterWithPropAndValDirect(student) {
+        return student[newCategory] === newCriteria;
+    }
+}
+
+export function getStats() {
+    let displayed = displayedStudents.length;
+    let gryffindor = filter("house", Student.HOUSES.gryffindor, studentList).length;
+    let ravenclaw = filter("house", Student.HOUSES.ravenclaw, studentList).length;
+    let hufflepuff = filter("house", Student.HOUSES.hufflepuff, studentList).length;
+    let slytherin = filter("house", Student.HOUSES.slytherin, studentList).length;
+    let expelled = filter("expelled", true, studentList).length;
+
+    return { displayed, gryffindor, ravenclaw, hufflepuff, slytherin, expelled };
 }

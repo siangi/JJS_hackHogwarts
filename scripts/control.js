@@ -13,6 +13,7 @@ async function init() {
     let students = await LoadClean.loadAndCleanStudents("./resources/students.json");
     View.showStudentList(students);
     Model.setStudentList(students);
+    View.showStats(Model.getStats());
 }
 
 export function getClickedStudent(fullname) {
@@ -33,5 +34,10 @@ export function sortingDirectionChange() {
 
 export function filterChange(property, value) {
     let filteredList = Model.changeFilter(property, value);
+    View.showStats(Model.getStats());
     View.showStudentList(filteredList);
+}
+
+function updateStudentsOnView(newList) {
+    View.showStudentList(newList);
 }

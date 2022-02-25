@@ -145,6 +145,11 @@ function removeHouseColorFromModal(houses, houseColorNode) {
     }
 }
 
-function sortByFirstName() {
-    Controller.sortingChange("fistname");
+export function showStats(stats) {
+    document.querySelector("[data-field=currentlyDisplayed]").textContent = stats.displayed;
+    document.querySelector("[data-field=gryffindorCount]").textContent = stats.gryffindor;
+    document.querySelector("[data-field=hufflepuffCount]").textContent = stats.hufflepuff;
+    document.querySelector("[data-field=ravenclawCount]").textContent = stats.ravenclaw;
+    document.querySelector("[data-field=slytherinCount]").textContent = stats.slytherin;
+    document.querySelector("[data-field=expelledCount]").textContent = stats.expelled;
 }
