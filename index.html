@@ -15,7 +15,35 @@
     </div>
     <main>
         <div class="rightColumn" id="filtersSorts" >
-            <h2>Filter</h2>
+            <h2>Filter:</h2>
+            <input type="radio" name="filterCategory" id="filterHouse" data-action="filterCategory" value="house">
+            <label for="filterHouse">
+                <p>House</p>
+                <select name="filterValHouse" data-value="filterVal">
+                    <option value="gryffindor">Gryffindor</option>
+                    <option value="hufflepuff">Hufflepuff</option>
+                    <option value="ravenclaw">Ravenclaw</option>
+                    <option value="slytherin">Slytherin</option>
+                </select>
+            </label>
+            <input type="radio" name="filterCategory" id="filterJob" data-action="filterCategory" value="roles">
+            <label for="filterJob">
+                <p>Job</p>
+                <select name="filterValJob" data-value="filterVal">
+                    <option value="captain">Quidditch Captain</option>
+                    <option value="inquisitor">Inquisitorial Squad</option>
+                    <option value="prefect">Prefect</option>
+                </select>
+            </label>
+            <input type="radio" name="filterCategory" id="filterBlood" data-action="filterCategory" value="bloodstatus">
+            <label for="filterBlood">
+                <p>Blood Status</p>
+                <select name="filterValBlood" data-value="filterVal">
+                    <option value="muggleborn">Muggleborn</option>
+                    <option value="halfblood">Halfblood</option>
+                    <option value="pureblood">Pureblood</option>
+                </select>
+            </label>
             <h2>Sort by:</h2>
             <p>sorting Direction</p>
             <button id="sortDirection" data-field="sortDirection">ascending</button>

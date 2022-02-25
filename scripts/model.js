@@ -105,3 +105,25 @@ export function changeSortingCriteria(newCriteria) {
     sorting.criteria = newCriteria;
     return sortBy(sorting.criteria, sorting.direction);
 }
+
+export function changeFilter(newCategory, newCriteria) {
+    let filteredList = filter(newCategory, newCriteria, studentList);
+    displayedStudents = filteredList;
+    return filteredList;
+}
+
+export function filter(newCategory, newCriteria, list) {
+    if (newCategory === "roles") {
+        return list.filter(filterWithPropAndValContains);
+    } else {
+        return list.filter(filterWithPropAndVal);
+    }
+
+    function filterWithPropAndVal(student) {
+        return student[newCategory].toLowerCase() === newCriteria.toLowerCase();
+    }
+
+    function filterWithPropAndValContains(student) {
+        return student[newCategory].indexOf(newCriteria) > -1;
+    }
+}

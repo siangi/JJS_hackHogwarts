@@ -6,6 +6,7 @@ window.onload = async () => {
     init();
     View.setSortingChange(sortingChange);
     View.setSortingDirectionChange(sortingDirectionChange);
+    View.setFilterChange(filterChange);
 };
 
 async function init() {
@@ -28,4 +29,9 @@ export function sortingDirectionChange() {
     View.showStudentList(newSorting.list);
 
     return newSorting.newDirection;
+}
+
+export function filterChange(property, value) {
+    let filteredList = Model.changeFilter(property, value);
+    View.showStudentList(filteredList);
 }

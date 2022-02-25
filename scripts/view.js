@@ -32,6 +32,32 @@ export function setSortingDirectionChange(sortFunc) {
     });
 }
 
+export function setFilterChange(filterFunc) {
+    let radioBtns = document.querySelectorAll("[data-action=filterCategory]");
+    radioBtns.forEach((radioBtn) => {
+        radioBtn.addEventListener("change", () => {
+            let filter = getFilterPropAndValue();
+            filterFunc(filter.property, filter.value);
+        });
+    });
+
+    let dropdowns = document.querySelectorAll("[data-value=filterVal]");
+    dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("change", () => {
+            let filter = getFilterPropAndValue();
+            filterFunc(filter.property, filter.value);
+        });
+    });
+}
+
+function getFilterPropAndValue() {
+    let propertyNode = document.querySelector("input[name=filterCategory]:checked");
+    let label = document.querySelector(`label[for=${propertyNode.id}]`);
+    let valueNode = label.querySelector("[data-value=filterVal]");
+
+    return { property: propertyNode.value, value: valueNode.value };
+}
+
 function getSelectedSorting() {
     return document.querySelector("input[name=sorting]:checked").value;
 }

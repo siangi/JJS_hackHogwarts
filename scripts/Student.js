@@ -26,8 +26,8 @@ export const HOUSES = {
 
 export const BLOODSTATUS = {
     pureblood: "pureblood",
-    halfBlood: "half blood",
-    muggleBorn: "muggle born",
+    halfBlood: "halfblood",
+    muggleBorn: "muggleborn",
 };
 
 export function createFullnameFromParts(firstname, middlename, lastname) {
