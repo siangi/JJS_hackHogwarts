@@ -11,8 +11,9 @@ window.onload = async () => {
 
 async function init() {
     let students = await LoadClean.loadAndCleanStudents("./resources/students.json");
-    View.showStudentList(students);
     Model.setStudentList(students);
+    students = Model.changeFilter("expelled", false);
+    View.showStudentList(students);
     View.showStats(Model.getStats());
 }
 

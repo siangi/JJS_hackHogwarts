@@ -107,7 +107,17 @@ export function changeSortingCriteria(newCriteria) {
 }
 
 export function changeFilter(newCategory, newCriteria) {
-    let filteredList = filter(newCategory, newCriteria, studentList);
+    let filteredList;
+    if (newCategory === "none") {
+        filteredList = filter("expelled", false, studentList);
+    } else if (newCategory === "expelled") {
+        filteredList = filter(newCategory, newCriteria, studentList);
+    } else {
+        // if we arent filtering to show the expelled students, always exclude them.
+        filteredList = filter(newCategory, newCriteria, studentList);
+        filteredList = filter("expelled", false, filteredList);
+    }
+
     displayedStudents = filteredList;
     return filteredList;
 }

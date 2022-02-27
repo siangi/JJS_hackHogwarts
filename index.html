@@ -8,6 +8,9 @@
     <script src="./scripts/control.js" type="module"></script>
     <script src="./scripts/view.js" type="module"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <div class="title">
@@ -16,6 +19,8 @@
     <main>
         <div class="rightColumn" id="filtersSorts" >
             <h2>Filter:</h2>
+            <input type="radio" name="filterCategory" id="filterNone" data-action="filterCategory" data-value="filterval" value="none">
+            <label for="filterNone">none</label>
             <input type="radio" name="filterCategory" id="filterHouse" data-action="filterCategory" value="house">
             <label for="filterHouse">
                 <p>House</p>
@@ -44,10 +49,12 @@
                     <option value="pureblood">Pureblood</option>
                 </select>
             </label>
+            <input type="radio" name="filterCategory" id="filterExpelled" data-action="filterCategory" value="expelled">
+            <label for="filterExpelled">Expelled</label>
             <h2>Sort by:</h2>
             <p>sorting Direction</p>
             <button id="sortDirection" data-field="sortDirection">ascending</button>
-            <input type="radio" name="sorting" id="sortFirstname" data-action="sortCriteria" value="firstname">
+            <input type="radio" name="sorting" id="sortFirstname" data-action="sortCriteria" value="firstname" checked="checked">
             <label for="sortFirstname">First name</label>
             <input type="radio" name="sorting" id="sortLastname" data-action="sortCriteria" value="lastname">
             <label for="sortLastname">Last name</label>

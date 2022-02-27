@@ -55,7 +55,11 @@ function getFilterPropAndValue() {
     let label = document.querySelector(`label[for=${propertyNode.id}]`);
     let valueNode = label.querySelector("[data-value=filterVal]");
 
-    return { property: propertyNode.value, value: valueNode.value };
+    if (valueNode === null) {
+        return { property: propertyNode.value, value: true };
+    } else {
+        return { property: propertyNode.value, value: valueNode.value };
+    }
 }
 
 function getSelectedSorting() {
