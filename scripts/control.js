@@ -58,7 +58,9 @@ export function handleRoleChange(changedRole, firstname, middlename, lastname) {
     return student.roles;
 }
 
-function inquisitorChanged(student) {}
+function inquisitorChanged(student) {
+    Model.toggleInquisitorStatus(student, View.InquisitorNotAllowed);
+}
 
 function prefectChanged(student) {}
 

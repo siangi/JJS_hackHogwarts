@@ -163,3 +163,24 @@ export function toggleCaptainStatus(student) {
         student.roles.push(Objects.ROLES.captain);
     }
 }
+
+export function toggleInquisitorStatus(student, notAllowedFunc) {
+    let index = student.roles.indexOf(Objects.ROLES.inquisitor);
+    if (index >= 0) {
+        student.roles.splice(index);
+    } else {
+        if (isStudentAllowedInquisitor(student)) {
+            student.roles.push(Objects.ROLES.inquisitor);
+        } else {
+            notAllowedFunc();
+        }
+    }
+}
+
+function isStudentAllowedInquisitor(student) {
+    return student.bloodstatus === Objects.BLOODSTATUS.pureblood || student.house === Objects.HOUSES.slytherin;
+}
+
+function isStudentAllowedPrefect(student) {}
+
+export function togglePrefectStatus(removeAnotherFunc) {}

@@ -68,6 +68,9 @@ export function setRoleChanged(roleChangedfunc) {
         updateStudentNodeRoles(createFullnameFromParts(names.firstname, names.middlename, names.lastname), newRoles);
     }
 }
+export function InquisitorNotAllowed() {
+    alert("This student is not allowed to be an Inquisitor! \r\n A student must be pureblood or in Slytherin to be an Inquisitor");
+}
 
 function updateStudentNodeRoles(fullname, roles) {
     let node = getStudentListNode(fullname);

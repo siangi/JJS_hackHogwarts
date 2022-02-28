@@ -14,7 +14,7 @@ export const Person = {
 export const ROLES = {
     prefect: "prefect",
     captain: "captain",
-    inquisitor: "inquistitor",
+    inquisitor: "inquisitor",
 };
 
 export const HOUSES = {
