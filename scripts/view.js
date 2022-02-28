@@ -1,6 +1,6 @@
 "use strict";
 
-import { Person, HOUSES, ROLES } from "./Student.js";
+import { Person, HOUSES, ROLES, createFullnameFromParts } from "./Student.js";
 import * as Controller from "./control.js";
 
 export function showStudentList(students) {
@@ -50,6 +50,58 @@ export function setFilterChange(filterFunc) {
     });
 }
 
+export function setRoleChanged(roleChangedfunc) {
+    let rolesCheckboxes = document.querySelectorAll("[data-action=roleChanged]");
+
+    rolesCheckboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", onRoleChange);
+    });
+
+    function onRoleChange(event) {
+        let changedRole = event.target.getAttribute("data-field");
+        let names = getNamesFromModal();
+        let newRoles = roleChangedfunc(changedRole, names.firstname, names.middlename, names.lastname);
+
+        let modal = document.querySelector(".modal");
+        fillModalRoles(newRoles, modal);
+
+        updateStudentNodeRoles(createFullnameFromParts(names.firstname, names.middlename, names.lastname), newRoles);
+    }
+}
+
+function updateStudentNodeRoles(fullname, roles) {
+    let node = getStudentListNode(fullname);
+    if (node !== null) {
+        node.querySelector("[data-field=roles]").textContent = roles.toString();
+    }
+}
+
+function getStudentListNode(fullname) {
+    let studentNodes = document.querySelectorAll(".student");
+    let searchResult;
+    console.log("student list node _" + fullname + "_");
+
+    for (const studentNode of studentNodes) {
+        const nodeName = studentNode.querySelector("[data-field=fullname]").textContent;
+        if (nodeName === fullname) {
+            searchResult = studentNode;
+            console.log(studentNode);
+            break;
+        }
+    }
+
+    return searchResult;
+}
+
+function getNamesFromModal() {
+    let modal = document.querySelector(".modal");
+    let firstname = modal.querySelector("[data-field=firstname]").textContent;
+    let middlename = modal.querySelector("[data-field=middlename]").textContent;
+    let lastname = modal.querySelector("[data-field=lastname]").textContent;
+
+    return { firstname, middlename, lastname };
+}
+
 function getFilterPropAndValue() {
     let propertyNode = document.querySelector("input[name=filterCategory]:checked");
     let label = document.querySelector(`label[for=${propertyNode.id}]`);
@@ -71,24 +123,12 @@ function showStudent(student) {
     let parent = document.querySelector("#studentList");
 
     clone.querySelector("[data-field='portrait']").setAttribute("src", student.filename);
-    clone.querySelector("[data-field='fullname']").textContent = `${student.firstname} ${student.middlename} ${student.lastname}`;
-    clone.querySelector("[data-field='roles']").textContent = buildRolesString(student.roles);
+    clone.querySelector("[data-field='fullname']").textContent = createFullnameFromParts(student.firstname, student.middlename, student.lastname);
+    clone.querySelector("[data-field='roles']").textContent = student.roles.toString();
     setHouseClass(clone.querySelector("[data-field='housecolor'"), student.house);
     clone.querySelector(".student").onclick = onStudentClick;
 
     parent.appendChild(clone);
-}
-
-function buildRolesString(roles) {
-    let allRoles = "";
-    roles.forEach((role) => {
-        allRoles += role + ", ";
-    });
-    if (allRoles.endsWith(", ")) {
-        allRoles.substring(0, allRoles.length - 1);
-    }
-
-    return allRoles;
 }
 
 // gives the student html object the proper class, so the proper housecolor is displayed
@@ -120,9 +160,15 @@ function fillModal(student, modal) {
     modal.querySelector(["[data-field=lastname"]).textContent = student.lastname;
     modal.querySelector(["[data-field=nickname"]).textContent = student.nickname;
     modal.querySelector(["[data-field=blood-status]"]).textContent = student.bloodstatus;
-    modal.querySelector(["[data-field=roles]"]).textContent = student.roles.toString();
     modal.querySelector(["[data-field=expelled]"]).textContent = student.expelled;
     modal.querySelector(["[data-field=houseColor]"]).classList.add(student.house.toLowerCase());
+    fillModalRoles(student.roles, modal);
+}
+
+function fillModalRoles(roles, modal) {
+    modal.querySelector("[data-field=inquisitor]").checked = roles.indexOf(ROLES.inquisitor) >= 0;
+    modal.querySelector("[data-field=prefect]").checked = roles.indexOf(ROLES.prefect) >= 0;
+    modal.querySelector("[data-field=captain").checked = roles.indexOf(ROLES.captain) >= 0;
 }
 
 export function closeModal() {

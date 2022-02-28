@@ -1,5 +1,5 @@
 "use strict";
-import * as Student from "./Student.js";
+import * as Objects from "./Student.js";
 
 // the enum values correspond to the property names on the student object
 // if they change, we only have to change them here for sorting.
@@ -38,7 +38,7 @@ function filterListByfullName(fullname) {
     return studentList.filter(compareFullname);
 
     function compareFullname(student) {
-        let studentfullname = Student.createFullnameFromParts(student.firstname, student.middlename, student.lastname);
+        let studentfullname = Objects.createFullnameFromParts(student.firstname, student.middlename, student.lastname);
 
         return studentfullname === fullname;
     }
@@ -146,11 +146,20 @@ export function filter(newCategory, newCriteria, list) {
 
 export function getStats() {
     let displayed = displayedStudents.length;
-    let gryffindor = filter("house", Student.HOUSES.gryffindor, studentList).length;
-    let ravenclaw = filter("house", Student.HOUSES.ravenclaw, studentList).length;
-    let hufflepuff = filter("house", Student.HOUSES.hufflepuff, studentList).length;
-    let slytherin = filter("house", Student.HOUSES.slytherin, studentList).length;
+    let gryffindor = filter("house", Objects.HOUSES.gryffindor, studentList).length;
+    let ravenclaw = filter("house", Objects.HOUSES.ravenclaw, studentList).length;
+    let hufflepuff = filter("house", Objects.HOUSES.hufflepuff, studentList).length;
+    let slytherin = filter("house", Objects.HOUSES.slytherin, studentList).length;
     let expelled = filter("expelled", true, studentList).length;
 
     return { displayed, gryffindor, ravenclaw, hufflepuff, slytherin, expelled };
+}
+
+export function toggleCaptainStatus(student) {
+    let index = student.roles.indexOf(Objects.ROLES.captain);
+    if (index >= 0) {
+        student.roles.splice(index);
+    } else {
+        student.roles.push(Objects.ROLES.captain);
+    }
 }

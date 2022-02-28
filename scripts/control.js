@@ -1,12 +1,14 @@
 import * as LoadClean from "./loadClean.js";
 import * as Model from "./model.js";
 import * as View from "./view.js";
+import * as Objects from "./Student.js";
 
 window.onload = async () => {
     init();
     View.setSortingChange(sortingChange);
     View.setSortingDirectionChange(sortingDirectionChange);
     View.setFilterChange(filterChange);
+    View.setRoleChanged(handleRoleChange);
 };
 
 async function init() {
@@ -38,6 +40,27 @@ export function filterChange(property, value) {
     View.showStats(Model.getStats());
     View.showStudentList(filteredList);
 }
+
+// takes some info about the student and the toggled role. If the change is allowed, it will return true.
+export function handleRoleChange(changedRole, firstname, middlename, lastname) {
+    let student = Model.getFirstStudentByName(Objects.createFullnameFromParts(firstname, middlename, lastname));
+
+    if (changedRole === Objects.ROLES.inquisitor) {
+        inquisitorChanged(student);
+    } else if (changedRole === Objects.ROLES.prefect) {
+        prefectChanged(student);
+    } else if (changedRole === Objects.ROLES.captain) {
+        Model.toggleCaptainStatus(student);
+    } else {
+        console.error("unsupported role: " + changedRole);
+    }
+
+    return student.roles;
+}
+
+function inquisitorChanged(student) {}
+
+function prefectChanged(student) {}
 
 function updateStudentsOnView(newList) {
     View.showStudentList(newList);

@@ -127,11 +127,15 @@
                     <h4 data-field="blood-status">Pureblood</h4>
                 </div>
                 <div class="withBtn">
-                    <div class="labelValueContainer">
+                    <div class="labelValueContainer" data-field="roles">
                         <p>roles</p>
-                        <h4 data-field="roles">Captain, Savior</h4>
+                        <input type="checkbox" name="rolePrefect" id="rolePrefect" data-field="prefect" data-action="roleChanged">
+                        <label for="rolePrefect">Prefect</label>
+                        <input type="checkbox" name="roleInquisitor" id="roleInquisitor" data-field="inquisitor" data-action="roleChanged">
+                        <label for="roleInquisitor">Inquisitorial Squad</label>
+                        <input type="checkbox" name="roleCaptain" id="roleCaptain" data-field="captain" data-action="roleChanged">
+                        <label for="roleCaptain">Captain</label>
                     </div>
-                    <button class="changeRoles">edit Roles</button>
                 </div>
                 <div class="withBtn">
                     <div class="labelValueContainer">
