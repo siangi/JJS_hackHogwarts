@@ -27,7 +27,6 @@ function createPeopleList(jsonPeople, familyStatus) {
         person.filename = getImagePath(person.lastname, person.firstname);
         person.bloodstatus = getBloodstatus(person.lastname, familyStatus);
         person.roles = [];
-        person.roles.push(ROLES.captain);
         peopleObjects.push(person);
     });
 
