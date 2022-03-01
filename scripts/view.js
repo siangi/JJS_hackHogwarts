@@ -10,6 +10,13 @@ export function showStudentList(students) {
     students.forEach(showStudent);
 }
 
+export function setSearch(searchFunc) {
+    let input = document.querySelector("[data-action=search");
+    input.addEventListener("change", (event) => {
+        searchFunc(event.target.value);
+    });
+}
+
 export function setSortingChange(sortFunc) {
     let radioBtns = document.querySelectorAll("[data-action=sortCriteria]");
     radioBtns.forEach((radioBtn) => {

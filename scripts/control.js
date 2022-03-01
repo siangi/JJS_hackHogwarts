@@ -10,6 +10,7 @@ window.onload = async () => {
     View.setFilterChange(filterChange);
     View.setRoleChanged(handleRoleChange);
     View.setExpelStudent(expelStudent);
+    View.setSearch(search);
 };
 
 async function init() {
@@ -17,6 +18,12 @@ async function init() {
     Model.setStudentList(students);
 
     View.showStudentList(Model.getDisplayedList());
+    View.showStats(Model.getStats());
+}
+
+export function search(searchString) {
+    let newList = Model.search(searchString);
+    View.showStudentList(newList);
     View.showStats(Model.getStats());
 }
 

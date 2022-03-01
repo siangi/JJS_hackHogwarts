@@ -25,6 +25,7 @@ export function setStudentList(list) {
 
     // for initialList, filter out all expelled students
     changeFilter("expelled", false);
+    changeSortingCriteria("firstname");
 }
 
 export function getDisplayedList() {
@@ -148,6 +149,19 @@ export function filter(newCategory, newCriteria, list) {
     function filterWithPropAndValDirect(student) {
         return student[newCategory] === newCriteria;
     }
+}
+
+export function search(searchString) {
+    displayedStudents = studentList.filter(checkAllNames);
+    let lower = searchString.toLowerCase();
+    function checkAllNames(person) {
+        return (
+            person.nickname.toLowerCase().indexOf(searchString) >= 0 ||
+            Objects.createFullnameFromParts(person.firstname, person.middlename, person.lastname).toLowerCase().indexOf(searchString) >= 0
+        );
+    }
+
+    return displayedStudents;
 }
 
 export function getStats() {
