@@ -136,11 +136,11 @@ main {
     align-self: center;
 }
 
-.modal .information {
+.information {
     padding: 1em;
     padding-bottom: 10em;
     background-color: var(--background-bright);
-    color: var(--text-dark);
+    color: #000000;
 }
 
 .modalTitle {
@@ -200,4 +200,26 @@ main {
 
 input[type="radio"] {
     display: block;
+}
+
+.dialog {
+    display: none;
+}
+
+.dialog.show {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dialogcontent {
+    background-color: var(--background-bright);
+    padding: 5vw 5vw 5vw 5vw;
+    position: relative;
 }

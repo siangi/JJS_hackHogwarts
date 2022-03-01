@@ -241,3 +241,29 @@ export function showStats(stats) {
     document.querySelector("[data-field=slytherinCount]").textContent = stats.slytherin;
     document.querySelector("[data-field=expelledCount]").textContent = stats.expelled;
 }
+
+export function showPrefectDialog(newPrefect, oldPrefect, onRemove) {
+    let dialog = document.querySelector("#prefectDialog");
+    let closeBtn = dialog.querySelector("[data-action=close]");
+    closeBtn.addEventListener("click", () => {
+        closePrefectDialog();
+    });
+
+    let removeBtn = dialog.querySelector("[data-action=remove]");
+    removeBtn.addEventListener("click", () => {
+        onRemove();
+        updateStudentNodeRoles(createFullnameFromParts(oldPrefect.firstname, oldPrefect.middlename, oldPrefect.lastname), oldPrefect.roles);
+        closePrefectDialog();
+    });
+
+    dialog.querySelector("[data-field=conflictName]").textContent = `${oldPrefect.firstname} ${oldPrefect.lastname}`;
+    dialog.querySelector("[data-field=title]").textContent = `You cannot make ${newPrefect.firstname} ${newPrefect.lastname} a prefect!`;
+    dialog.classList.add("show");
+}
+
+function closePrefectDialog(onClose, onRemove) {
+    let dialog = document.querySelector("#prefectDialog");
+    dialog.querySelector("[data-action=close]").onclick = null;
+    dialog.querySelector("[data-action=remove]").onclick = null;
+    dialog.classList.remove("show");
+}

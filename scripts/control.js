@@ -80,7 +80,9 @@ function inquisitorChanged(student) {
     Model.toggleInquisitorStatus(student, View.InquisitorNotAllowed);
 }
 
-function prefectChanged(student) {}
+function prefectChanged(student) {
+    Model.togglePrefectStatus(student, View.showPrefectDialog);
+}
 
 function updateStudentsOnView(newList) {
     View.showStudentList(newList);

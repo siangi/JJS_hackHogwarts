@@ -152,12 +152,13 @@ export function filter(newCategory, newCriteria, list) {
 }
 
 export function search(searchString) {
-    displayedStudents = studentList.filter(checkAllNames);
     let lower = searchString.toLowerCase();
+    displayedStudents = studentList.filter(checkAllNames);
+
     function checkAllNames(person) {
         return (
             person.nickname.toLowerCase().indexOf(searchString) >= 0 ||
-            Objects.createFullnameFromParts(person.firstname, person.middlename, person.lastname).toLowerCase().indexOf(searchString) >= 0
+            Objects.createFullnameFromParts(person.firstname, person.middlename, person.lastname).toLowerCase().indexOf(lower) >= 0
         );
     }
 
@@ -211,6 +212,40 @@ export function isStudentAllowedInquisitor(student) {
     return student.bloodstatus === Objects.BLOODSTATUS.pureblood || student.house === Objects.HOUSES.slytherin;
 }
 
-function isStudentAllowedPrefect(student) {}
+function tryGetOtherPrefect(student) {
+    let onlyHouse = filter("house", student.house, studentList);
+    let onlyPrefect = filter("roles", Objects.ROLES.prefect, onlyHouse);
+    let sameGender = filter("gender", student.gender, onlyPrefect);
 
-export function togglePrefectStatus(removeAnotherFunc) {}
+    if (sameGender.length === 0) {
+        return null;
+    } else {
+        return sameGender[0];
+    }
+}
+
+export function togglePrefectStatus(student, removeAnotherFunc) {
+    let index = student.roles.indexOf(Objects.ROLES.prefect);
+
+    // if he already is a prefect we can just remove th role and leave
+    if (index >= 0) {
+        student.roles.splice(student.roles.splice(index));
+        return;
+    }
+
+    let otherPrefect = tryGetOtherPrefect(student);
+    if (otherPrefect == null) {
+        student.roles.push(Objects.ROLES.prefect);
+        return;
+    }
+
+    //there already is another prefect so we need to either remove one or abort
+    // if removeAnotherFunc returns true, the other one was removed
+    let removed = removeAnotherFunc(student, otherPrefect, changePrefects);
+
+    function changePrefects() {
+        let otherIndex = otherPrefect.roles.indexOf(Objects.ROLES.prefect);
+        otherPrefect.roles.splice(otherIndex);
+        student.roles.push(Objects.ROLES.prefect);
+    }
+}

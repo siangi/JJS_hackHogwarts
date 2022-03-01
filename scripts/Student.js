@@ -6,6 +6,7 @@ export const Person = {
     filename: "",
     crestFilename: "",
     bloodstatus: "",
+    gender: "",
     house: "",
     roles: [],
     expelled: false,
