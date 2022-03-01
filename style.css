@@ -223,3 +223,22 @@ input[type="radio"] {
     padding: 5vw 5vw 5vw 5vw;
     position: relative;
 }
+
+#hackedScreen {
+    display: none;
+}
+
+#hackedScreen.show {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgb(34, 255, 0);
+    font-family: BluuNext;
+    font-size: 8em;
+}

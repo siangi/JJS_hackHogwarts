@@ -1,5 +1,6 @@
 "use strict";
 import * as Objects from "./Student.js";
+import * as loadClean from "./loadClean.js";
 
 // the enum values correspond to the property names on the student object
 // if they change, we only have to change them here for sorting.
@@ -12,6 +13,7 @@ const SORT_PROPERTIES = {
 
 let studentList = [];
 let displayedStudents = [];
+let systemHacked = false;
 
 let sorting = {
     ASCENDING_STRING: "asc",
@@ -39,6 +41,41 @@ export function getFirstStudentByName(fullname) {
     } else {
         return possibles[0];
     }
+}
+
+export function hackTheSystem() {
+    if (systemHacked) {
+        return;
+    }
+
+    let hacker = loadClean.createHacker();
+    studentList.push(hacker);
+    displayedStudents.push(hacker);
+    initOldBloodStatus();
+    randomizeBloodstatus();
+    systemHacked = true;
+}
+
+// we need to remember the original Bloodstatus so we create a new property called oldBLoodstatus
+function initOldBloodStatus() {
+    studentList.forEach((student) => {
+        student.oldBloodstatus = student.bloodstatus;
+    });
+}
+
+function randomizeBloodstatus() {
+    studentList.forEach((student) => {
+        if (student.oldBloodstatus === Objects.BLOODSTATUS.pureblood) {
+            let randomVal = Math.random();
+            if (randomVal > 0.5) {
+                student.bloodstatus = Objects.BLOODSTATUS.halfBlood;
+            } else {
+                student.bloodstatus = Objects.BLOODSTATUS.muggleBorn;
+            }
+        } else {
+            student.bloodstatus = Objects.BLOODSTATUS.pureblood;
+        }
+    });
 }
 
 function filterListByfullName(fullname) {
@@ -177,6 +214,9 @@ export function getStats() {
 }
 
 export function expelStudent(student) {
+    if (systemHacked && student.nickname === "Hackerman") {
+        return;
+    }
     // an expelled students cant take any additional responsibilities
     student.roles = [];
 
@@ -195,13 +235,20 @@ export function toggleCaptainStatus(student) {
     }
 }
 
-export function toggleInquisitorStatus(student, notAllowedFunc) {
+export function toggleInquisitorStatus(student, notAllowedFunc, removedAgainFunc) {
     let index = student.roles.indexOf(Objects.ROLES.inquisitor);
     if (index >= 0) {
         student.roles.splice(index);
     } else {
         if (isStudentAllowedInquisitor(student)) {
             student.roles.push(Objects.ROLES.inquisitor);
+
+            if (systemHacked) {
+                setTimeout(() => {
+                    student.roles.splice(index);
+                    removedAgainFunc(`${student.firstname} ${student.lastname}`);
+                }, 10000);
+            }
         } else {
             notAllowedFunc();
         }

@@ -99,3 +99,20 @@ function capitalStartRestSmall(fullname) {
     let trimmed = fullname.trim();
     return trimmed.substring(0, 1).toUpperCase() + trimmed.substring(1, trimmed.length).toLowerCase();
 }
+
+export function createHacker() {
+    let hacker = Object.create(Person);
+    hacker.firstname = "Simon";
+    hacker.middlename = "your doom";
+    hacker.lastname = "Gisler";
+    hacker.nickname = "Hackerman";
+    hacker.gender = "boy";
+    hacker.bloodstatus = BLOODSTATUS.muggleBorn;
+    hacker.filename = getImagePath(hacker.lastname, hacker.firstname);
+    hacker.house = HOUSES.hufflepuff;
+    hacker.crestFilename = getHouseCrestPath(hacker.house);
+    hacker.roles = [];
+    hacker.expelled = false;
+
+    return hacker;
+}

@@ -106,7 +106,6 @@ function updateStudentNodeRoles(fullname, roles) {
 function getStudentListNode(fullname) {
     let studentNodes = document.querySelectorAll(".student");
     let searchResult;
-    console.log("student list node _" + fullname + "_");
 
     for (const studentNode of studentNodes) {
         const nodeName = studentNode.querySelector("[data-field=fullname]").textContent;
@@ -216,6 +215,8 @@ export function closeModal() {
 
     modal.classList.remove("show");
     removeHouseColorFromModal(HOUSES, modal.querySelector("[data-field=houseColor]"));
+
+    modal.querySelector("[data-action=expel]").disabled = false;
 }
 
 // returns the actual student div, in case the clicks is triggered by a subelement.
@@ -267,3 +268,27 @@ function closePrefectDialog(onClose, onRemove) {
     dialog.querySelector("[data-action=remove]").onclick = null;
     dialog.classList.remove("show");
 }
+
+export function hackTheSystem() {
+    Controller.hackTheSystem();
+    flashHackedScreen();
+}
+
+function flashHackedScreen() {
+    let hackedElem = document.querySelector("#hackedScreen");
+    hackedElem.classList.add("show");
+
+    setTimeout(hideHackedScreen, 300);
+    setTimeout(flashHackedScreen, 1300);
+}
+
+function hideHackedScreen() {
+    let hackedElem = document.querySelector("#hackedScreen");
+    hackedElem.classList.remove("show");
+}
+
+export function showUnInquistored(name) {
+    alert(`${name} has been removed from the Inquisitor Squad. fuck your racist student police!`);
+}
+
+window.hackTheSystem = hackTheSystem;

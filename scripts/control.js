@@ -77,13 +77,15 @@ function expelStudent(firstname, middlename, lastname) {
 }
 
 function inquisitorChanged(student) {
-    Model.toggleInquisitorStatus(student, View.InquisitorNotAllowed);
+    Model.toggleInquisitorStatus(student, View.InquisitorNotAllowed, View.showUnInquistored);
 }
 
 function prefectChanged(student) {
     Model.togglePrefectStatus(student, View.showPrefectDialog);
 }
 
-function updateStudentsOnView(newList) {
-    View.showStudentList(newList);
+export function hackTheSystem() {
+    Model.hackTheSystem();
+    View.showStudentList(Model.getDisplayedList());
+    View.showStats(Model.getStats());
 }
