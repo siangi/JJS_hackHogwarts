@@ -68,8 +68,25 @@ export function setRoleChanged(roleChangedfunc) {
         updateStudentNodeRoles(createFullnameFromParts(names.firstname, names.middlename, names.lastname), newRoles);
     }
 }
+
+export function setExpelStudent(expelFunc) {
+    let expelBtn = document.querySelector("[data-action=expel]");
+    expelBtn.addEventListener("click", () => {
+        let names = getNamesFromModal();
+        expelFunc(names.firstname, names.middlename, names.lastname);
+        let modal = document.querySelector(".modal");
+        modal.querySelector("[data-field=expelled]").textContent = getExpelledString(true);
+        fillModalRoles([], modal);
+        setExpelledBtnStatus(true);
+    });
+}
+
 export function InquisitorNotAllowed() {
     alert("This student is not allowed to be an Inquisitor! \r\n A student must be pureblood or in Slytherin to be an Inquisitor");
+}
+
+function setExpelledBtnStatus(expelled) {
+    document.querySelector("[data-action=expel]").disabled = expelled;
 }
 
 function updateStudentNodeRoles(fullname, roles) {
@@ -163,7 +180,10 @@ function fillModal(student, modal) {
     modal.querySelector(["[data-field=lastname"]).textContent = student.lastname;
     modal.querySelector(["[data-field=nickname"]).textContent = student.nickname;
     modal.querySelector(["[data-field=blood-status]"]).textContent = student.bloodstatus;
-    modal.querySelector(["[data-field=expelled]"]).textContent = student.expelled;
+    modal.querySelector(["[data-field=expelled]"]).textContent = getExpelledString(student.expelled);
+    if (student.expelled) {
+        setExpelledBtnStatus(student.expelled);
+    }
     modal.querySelector(["[data-field=houseColor]"]).classList.add(student.house.toLowerCase());
     fillModalRoles(student.roles, modal);
 }
@@ -172,6 +192,14 @@ function fillModalRoles(roles, modal) {
     modal.querySelector("[data-field=inquisitor]").checked = roles.indexOf(ROLES.inquisitor) >= 0;
     modal.querySelector("[data-field=prefect]").checked = roles.indexOf(ROLES.prefect) >= 0;
     modal.querySelector("[data-field=captain").checked = roles.indexOf(ROLES.captain) >= 0;
+}
+
+function getExpelledString(expelled) {
+    if (expelled) {
+        return "expelled";
+    } else {
+        return "enrolled";
+    }
 }
 
 export function closeModal() {

@@ -85,9 +85,6 @@ function fillNames(fullname, personToFill) {
 
     // add middle names in a loop, because there can be multiple
     // skip first an lastname
-    if (personToFill.firstname === "Harry") {
-        console.log("reached Harry");
-    }
     for (let i = 1; i <= namesArr.length - 2; i++) {
         personToFill.middlename += ` ${capitalStartRestSmall(namesArr[i])}`;
     }

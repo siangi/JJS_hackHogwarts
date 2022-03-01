@@ -9,13 +9,14 @@ window.onload = async () => {
     View.setSortingDirectionChange(sortingDirectionChange);
     View.setFilterChange(filterChange);
     View.setRoleChanged(handleRoleChange);
+    View.setExpelStudent(expelStudent);
 };
 
 async function init() {
     let students = await LoadClean.loadAndCleanStudents("./resources/students.json");
     Model.setStudentList(students);
-    students = Model.changeFilter("expelled", false);
-    View.showStudentList(students);
+
+    View.showStudentList(Model.getDisplayedList());
     View.showStats(Model.getStats());
 }
 
@@ -56,6 +57,16 @@ export function handleRoleChange(changedRole, firstname, middlename, lastname) {
     }
 
     return student.roles;
+}
+
+function expelStudent(firstname, middlename, lastname) {
+    let fullname = Objects.createFullnameFromParts(firstname, middlename, lastname);
+    let student = Model.getFirstStudentByName(fullname);
+    // implement expel student, strip him of all jobs
+    Model.expelStudent(student);
+    View.showStudentList(Model.getDisplayedList());
+    View.showStats(Model.getStats());
+    return student;
 }
 
 function inquisitorChanged(student) {

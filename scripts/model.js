@@ -22,7 +22,13 @@ let sorting = {
 
 export function setStudentList(list) {
     studentList = list;
-    displayedStudents = list;
+
+    // for initialList, filter out all expelled students
+    changeFilter("expelled", false);
+}
+
+export function getDisplayedList() {
+    return displayedStudents;
 }
 
 export function getFirstStudentByName(fullname) {
@@ -155,6 +161,16 @@ export function getStats() {
     return { displayed, gryffindor, ravenclaw, hufflepuff, slytherin, expelled };
 }
 
+export function expelStudent(student) {
+    // an expelled students cant take any additional responsibilities
+    student.roles = [];
+
+    student.expelled = true;
+
+    // filter the expelled student out.
+    displayedStudents = filter("expelled", false, displayedStudents);
+}
+
 export function toggleCaptainStatus(student) {
     let index = student.roles.indexOf(Objects.ROLES.captain);
     if (index >= 0) {
@@ -177,7 +193,7 @@ export function toggleInquisitorStatus(student, notAllowedFunc) {
     }
 }
 
-function isStudentAllowedInquisitor(student) {
+export function isStudentAllowedInquisitor(student) {
     return student.bloodstatus === Objects.BLOODSTATUS.pureblood || student.house === Objects.HOUSES.slytherin;
 }
 
