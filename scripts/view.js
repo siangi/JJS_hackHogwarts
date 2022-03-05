@@ -66,6 +66,7 @@ export function setRoleChanged(roleChangedfunc) {
 
     function onRoleChange(event) {
         let changedRole = event.target.getAttribute("data-field");
+        console.log("changed", changedRole);
         let names = getNamesFromModal();
         let newRoles = roleChangedfunc(changedRole, names.firstname, names.middlename, names.lastname);
 
@@ -97,7 +98,6 @@ function setExpelledBtnStatus(expelled) {
 }
 
 function updateStudentNodeRoles(fullname, roles) {
-    console.log("called for: " + fullname);
     let node = getStudentListNode(fullname);
     if (node !== null) {
         node.querySelector("[data-field=roles]").textContent = roles.toString();

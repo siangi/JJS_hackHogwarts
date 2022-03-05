@@ -229,7 +229,7 @@ export function expelStudent(student) {
 export function toggleCaptainStatus(student) {
     let index = student.roles.indexOf(Objects.ROLES.captain);
     if (index >= 0) {
-        student.roles.splice(index);
+        student.roles.splice(index, 1);
     } else {
         student.roles.push(Objects.ROLES.captain);
     }
@@ -238,14 +238,14 @@ export function toggleCaptainStatus(student) {
 export function toggleInquisitorStatus(student, notAllowedFunc, removedAgainFunc) {
     let index = student.roles.indexOf(Objects.ROLES.inquisitor);
     if (index >= 0) {
-        student.roles.splice(index);
+        student.roles.splice(index, 1);
     } else {
         if (isStudentAllowedInquisitor(student)) {
             student.roles.push(Objects.ROLES.inquisitor);
 
             if (systemHacked) {
                 setTimeout(() => {
-                    student.roles.splice(index);
+                    student.roles.splice(index, 1);
                     removedAgainFunc(`${student.firstname} ${student.lastname}`);
                 }, 10000);
             }
@@ -276,7 +276,7 @@ export function togglePrefectStatus(student, removeAnotherFunc) {
 
     // if he already is a prefect we can just remove th role and leave
     if (index >= 0) {
-        student.roles.splice(student.roles.splice(index));
+        student.roles.splice(index, 1);
         return;
     }
 
@@ -292,7 +292,7 @@ export function togglePrefectStatus(student, removeAnotherFunc) {
 
     function changePrefects() {
         let otherIndex = otherPrefect.roles.indexOf(Objects.ROLES.prefect);
-        otherPrefect.roles.splice(otherIndex);
+        otherPrefect.roles.splice(otherIndex, 1);
         student.roles.push(Objects.ROLES.prefect);
         console.log("called RemoveListener, " + student.firstname);
     }
