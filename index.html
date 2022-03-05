@@ -14,6 +14,7 @@
 </head>
 <body>
     <div class="title">
+        <img src="./resources/crests/hogwarts.png">
         <h1>Studentlist</h1>
     </div>
     <main>
@@ -21,54 +22,74 @@
             <h2>Search:</h2>
             <input type="text" name="nameSearch" id="nameSearch" data-action="search">
             <h2>Filter:</h2>
-            <input type="radio" name="filterCategory" id="filterNone" data-action="filterCategory" data-value="filterval" value="none" checked="checked">
-            <label for="filterNone">none</label>
-            <input type="radio" name="filterCategory" id="filterHouse" data-action="filterCategory" value="house">
-            <label for="filterHouse">
-                <p>House</p>
-                <select name="filterValHouse" data-value="filterVal">
-                    <option value="gryffindor">Gryffindor</option>
-                    <option value="hufflepuff">Hufflepuff</option>
-                    <option value="ravenclaw">Ravenclaw</option>
-                    <option value="slytherin">Slytherin</option>
-                </select>
-            </label>
-            <input type="radio" name="filterCategory" id="filterJob" data-action="filterCategory" value="roles">
-            <label for="filterJob">
-                <p>Job</p>
-                <select name="filterValJob" data-value="filterVal">
-                    <option value="captain">Quidditch Captain</option>
-                    <option value="inquisitor">Inquisitorial Squad</option>
-                    <option value="prefect">Prefect</option>
-                </select>
-            </label>
-            <input type="radio" name="filterCategory" id="filterBlood" data-action="filterCategory" value="bloodstatus">
-            <label for="filterBlood">
-                <p>Blood Status</p>
-                <select name="filterValBlood" data-value="filterVal">
-                    <option value="muggleborn">Muggleborn</option>
-                    <option value="halfblood">Halfblood</option>
-                    <option value="pureblood">Pureblood</option>
-                </select>
-            </label>
-            <input type="radio" name="filterCategory" id="filterExpelled" data-action="filterCategory" value="expelled">
-            <label for="filterExpelled">Expelled</label>
+            <div>
+                <input type="radio" name="filterCategory" id="filterNone" data-action="filterCategory" data-value="filterval" value="none" checked="checked">
+                <label for="filterNone">none</label>
+            </div>  
+            <div>
+                <input type="radio" name="filterCategory" id="filterHouse" data-action="filterCategory" value="house">
+                <label for="filterHouse">
+                    House
+                    <select name="filterValHouse" data-value="filterVal">
+                        <option value="gryffindor">Gryffindor</option>
+                        <option value="hufflepuff">Hufflepuff</option>
+                        <option value="ravenclaw">Ravenclaw</option>
+                        <option value="slytherin">Slytherin</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <input type="radio" name="filterCategory" id="filterJob" data-action="filterCategory" value="roles">
+                <label for="filterJob">
+                    Job
+                    <select name="filterValJob" data-value="filterVal">
+                        <option value="captain">Quidditch Captain</option>
+                        <option value="inquisitor">Inquisitorial Squad</option>
+                        <option value="prefect">Prefect</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <input type="radio" name="filterCategory" id="filterBlood" data-action="filterCategory" value="bloodstatus">
+                <label for="filterBlood">
+                    Blood Status
+                    <select name="filterValBlood" data-value="filterVal">
+                        <option value="muggleborn">Muggleborn</option>
+                        <option value="halfblood">Halfblood</option>
+                        <option value="pureblood">Pureblood</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <input type="radio" name="filterCategory" id="filterExpelled" data-action="filterCategory" value="expelled">
+                <label for="filterExpelled">Expelled</label>
+            </div>
             <h2>Sort by:</h2>
-            <p>sorting Direction</p>
-            <button id="sortDirection" data-field="sortDirection">ascending</button>
-            <input type="radio" name="sorting" id="sortFirstname" data-action="sortCriteria" value="firstname" checked="checked">
-            <label for="sortFirstname">First name</label>
-            <input type="radio" name="sorting" id="sortLastname" data-action="sortCriteria" value="lastname">
-            <label for="sortLastname">Last name</label>
-            <input type="radio" name="sorting" id="sortHouse" data-action="sortCriteria" value="house">
-            <label for="sortHouse">House</label>
-            <input type="radio" name="sorting" id="sortJobs" data-action="sortCriteria" value="jobs">
-            <label for="sortJobs">Jobs</label>
+            <div class="sortings">
+                <p>sorting Direction</p>
+                <button id="sortDirection" data-field="sortDirection">ascending</button>
+                <div>
+                    <input type="radio" name="sorting" id="sortFirstname" data-action="sortCriteria" value="firstname" checked="checked">
+                    <label for="sortFirstname">First name</label>
+                </div>
+                <div>
+                    <input type="radio" name="sorting" id="sortLastname" data-action="sortCriteria" value="lastname">
+                    <label for="sortLastname">Last name</label>
+                </div>
+                <div>
+                    <input type="radio" name="sorting" id="sortHouse" data-action="sortCriteria" value="house">
+                    <label for="sortHouse">House</label>
+                </div>
+                <div>
+                    <input type="radio" name="sorting" id="sortJobs" data-action="sortCriteria" value="jobs">
+                    <label for="sortJobs">Jobs</label>
+                </div>
+            </div>
         </div>
         <div class="center" id="studentList">     
         </div>
         <div class="leftColumn" id="statistics">
-            <h2>statistics</h2>
+            <h2>Statistics</h2>
             <div class="labelValueContainer">
                 <h4>Currently Displayed</h4>
                 <p data-field="currentlyDisplayed"></p>
@@ -105,7 +126,7 @@
                     <img src="resources/students/potter_h.png" data-field="profilepicture">
                 </div>
             </div>
-            <div class="information">
+            <div class="information" id="studentInfo">
                 <div class="names">
                     <div class="labelValueContainer">
                         <p>firstname</p>

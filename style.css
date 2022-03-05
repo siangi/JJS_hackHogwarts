@@ -6,14 +6,14 @@
 :root {
     --gryffindor-color: #740001;
     --ravenclaw-color: #0e1a40;
-    --slytherin-color: #1a472a;
+    --slytherin-color: #256d3e;
     --hufflepuff-color: #ffdb00;
 
     --background-blue: #365a63;
     --background-bright: #e8deae;
     --element-blue: #0f4c5c;
-    --text-bright: #ffffff;
-    --text-dark: #000000;
+    --text-bright: #ececec;
+    --text-dark: #2e2b2b;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 h1 {
     padding: 0px;
     margin: 0px;
-    font-size: 2em;
+    font-size: 2.5em;
 }
 
 h1,
@@ -46,8 +46,17 @@ label {
 
 .title {
     width: 100%;
-    height: 10vh;
+    height: 12vh;
     background-color: var(--background-blue);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.title img {
+    width: 4em;
+    height: auto;
 }
 
 main {
@@ -58,9 +67,11 @@ main {
     flex-wrap: nowrap;
 }
 
-.rightColumn {
+.rightColumn,
+.leftColumn {
     width: 20%;
     background-color: var(--background-blue);
+    padding: 0.5em;
 }
 
 .center {
@@ -73,11 +84,6 @@ main {
     /* overflow-y: scroll; */
 }
 
-.leftColumn {
-    width: 20%;
-    background-color: var(--background-blue);
-}
-
 .student {
     margin-top: 1em;
     width: 45%;
@@ -85,6 +91,7 @@ main {
     display: flex;
     flex-direction: row;
     background-color: var(--element-blue);
+    border-radius: 4.5vh;
 }
 
 .student .houseColor {
@@ -136,11 +143,17 @@ main {
     align-self: center;
 }
 
-.information {
+#studentInfo {
     padding: 1em;
     padding-bottom: 10em;
     background-color: var(--background-bright);
-    color: #000000;
+}
+
+#studentInfo p,
+#studentInfo label,
+#studentInfo h4,
+#studentInfo h3 {
+    color: var(--text-dark);
 }
 
 .modalTitle {
@@ -196,10 +209,6 @@ main {
 
 .withBtn {
     display: flex;
-}
-
-input[type="radio"] {
-    display: block;
 }
 
 .dialog {
