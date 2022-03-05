@@ -97,6 +97,7 @@ function setExpelledBtnStatus(expelled) {
 }
 
 function updateStudentNodeRoles(fullname, roles) {
+    console.log("called for: " + fullname);
     let node = getStudentListNode(fullname);
     if (node !== null) {
         node.querySelector("[data-field=roles]").textContent = roles.toString();
@@ -111,7 +112,7 @@ function getStudentListNode(fullname) {
         const nodeName = studentNode.querySelector("[data-field=fullname]").textContent;
         if (nodeName === fullname) {
             searchResult = studentNode;
-            console.log(studentNode);
+
             break;
         }
     }
@@ -244,7 +245,12 @@ export function showStats(stats) {
 }
 
 export function showPrefectDialog(newPrefect, oldPrefect, onRemove) {
-    let dialog = document.querySelector("#prefectDialog");
+    // recreate the dialog, to remove all the event listeners. So If we remove a student, only that one gets removed,
+    // not another one from an older action.
+    let oldDialog = document.querySelector("#prefectDialog");
+    let dialog = oldDialog.cloneNode(true);
+    oldDialog.replaceWith(dialog);
+
     let closeBtn = dialog.querySelector("[data-action=close]");
     closeBtn.addEventListener("click", () => {
         closePrefectDialog();
@@ -254,6 +260,8 @@ export function showPrefectDialog(newPrefect, oldPrefect, onRemove) {
     removeBtn.addEventListener("click", () => {
         onRemove();
         updateStudentNodeRoles(createFullnameFromParts(oldPrefect.firstname, oldPrefect.middlename, oldPrefect.lastname), oldPrefect.roles);
+        updateStudentNodeRoles(createFullnameFromParts(newPrefect.firstname, newPrefect.middlename, newPrefect.lastname), newPrefect.roles);
+        fillModalRoles(newPrefect.roles, document.querySelector(".modal"));
         closePrefectDialog();
     });
 
@@ -264,8 +272,7 @@ export function showPrefectDialog(newPrefect, oldPrefect, onRemove) {
 
 function closePrefectDialog(onClose, onRemove) {
     let dialog = document.querySelector("#prefectDialog");
-    dialog.querySelector("[data-action=close]").onclick = null;
-    dialog.querySelector("[data-action=remove]").onclick = null;
+
     dialog.classList.remove("show");
 }
 

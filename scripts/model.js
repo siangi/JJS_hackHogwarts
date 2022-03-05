@@ -294,5 +294,6 @@ export function togglePrefectStatus(student, removeAnotherFunc) {
         let otherIndex = otherPrefect.roles.indexOf(Objects.ROLES.prefect);
         otherPrefect.roles.splice(otherIndex);
         student.roles.push(Objects.ROLES.prefect);
+        console.log("called RemoveListener, " + student.firstname);
     }
 }

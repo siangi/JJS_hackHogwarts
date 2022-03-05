@@ -14,6 +14,8 @@
     --element-blue: #0f4c5c;
     --text-bright: #ececec;
     --text-dark: #2e2b2b;
+
+    --border-radius-student: 4.5vh;
 }
 
 body {
@@ -91,16 +93,21 @@ main {
     display: flex;
     flex-direction: row;
     background-color: var(--element-blue);
-    border-radius: 4.5vh;
+    border-radius: var(--border-radius-student);
 }
 
 .student .houseColor {
     display: block;
     width: 1em;
     height: 1em;
+    border-radius: 1em;
 }
 
-.gryffindor {
+.student .description {
+    padding-left: 0.2em;
+}
+
+.student .gryffindor {
     background-color: var(--gryffindor-color);
 }
 
@@ -145,7 +152,7 @@ main {
 
 #studentInfo {
     padding: 1em;
-    padding-bottom: 10em;
+    padding-bottom: 10vh;
     background-color: var(--background-bright);
 }
 
@@ -168,9 +175,14 @@ main {
     height: 10vh;
 }
 
+.modalTitle {
+    border-radius: var(--border-radius-student) var(--border-radius-student) 0vh 0vh;
+}
+
 .modalTitle img {
     height: 100%;
     width: auto;
+    padding: 1em;
 }
 
 .modalTitle button {
