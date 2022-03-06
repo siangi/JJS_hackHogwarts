@@ -159,7 +159,9 @@ main {
 #studentInfo p,
 #studentInfo label,
 #studentInfo h4,
-#studentInfo h3 {
+#studentInfo h3,
+.dialog p,
+.dialog h2 {
     color: var(--text-dark);
 }
 
@@ -237,6 +239,7 @@ main {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.4);
+    font-family: Raleway, sans-serif;
 }
 
 .dialogcontent {
