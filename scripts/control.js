@@ -14,7 +14,8 @@ window.onload = async () => {
 };
 
 async function init() {
-    let students = await LoadClean.loadAndCleanStudents("http://petlatkea.dk/2021/hogwarts/students.json ", "http://petlatkea.dk/2021/hogwarts/families.json ");
+    // load local files, because github pages throws an error when trying to laod with the url
+    let students = await LoadClean.loadAndCleanStudents("./resources/students.json", "./resources/families.json");
     Model.setStudentList(students);
 
     View.showStudentList(Model.getDisplayedList());
