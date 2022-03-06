@@ -14,7 +14,7 @@ window.onload = async () => {
 };
 
 async function init() {
-    let students = await LoadClean.loadAndCleanStudents("./resources/students.json");
+    let students = await LoadClean.loadAndCleanStudents("http://petlatkea.dk/2021/hogwarts/students.json ", "http://petlatkea.dk/2021/hogwarts/families.json ");
     Model.setStudentList(students);
 
     View.showStudentList(Model.getDisplayedList());

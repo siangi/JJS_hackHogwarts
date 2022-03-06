@@ -2,15 +2,14 @@
 const BASE_RESOURCES_PATH = "...\\..\\resources";
 import { Person, HOUSES, ROLES, BLOODSTATUS } from "./Student.js";
 
-export async function loadAndCleanStudents(url) {
-    let families = await loadJsonData("./resources/families.json").then(createFamiliesList);
-    console.log(families);
+export async function loadAndCleanStudents(url, bloodStatusUrl) {
+    let families = await loadJsonData(bloodStatusUrl).then(createFamiliesList);
     let studentList = await loadJsonData(url).then((peopleJSon) => createPeopleList(peopleJSon, families));
     return studentList;
 }
 
 async function loadJsonData(url) {
-    const response = await fetch(url, { mode: "no-cors" }).then((data) => {
+    const response = await fetch(url).then((data) => {
         return data.json();
     });
 

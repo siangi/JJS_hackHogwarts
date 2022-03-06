@@ -89,7 +89,7 @@ main {
 .student {
     margin-top: 1em;
     width: 45%;
-    height: 20vh;
+    height: 15vh;
     display: flex;
     flex-direction: row;
     background-color: var(--element-blue);
